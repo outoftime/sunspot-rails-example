@@ -7,3 +7,5 @@
       %h4.timestamp= result.published_at.to_s
       %p= best_hit_description(hit)
       %p.tags= result.tags
+
+.pagination= will_paginate(@search.hits)
