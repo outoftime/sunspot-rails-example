@@ -1,6 +1,22 @@
+%ul.facets
+  %li
+    %h4 Category
+    %ul
+      - @search.facet(:category_id).rows.each do |row|
+        %li== #{link_to(row.instance.name, params.merge(:cat => row.value).except(:page))} (#{row.count})
+  %li
+    %h4 Tag
+    %ul
+      - @search.facet(:tags).rows.each do |row|
+        %li== #{link_to(row.value, params.merge(:tags => ((params[:tags] || []) << row.value)).except(:page))} (#{row.count})
+
+
+%h4== Displaying posts #{(@search.hits.current_page - 1) * @search.hits.per_page + 1} - #{@search.hits.current_page * @search.hits.per_page} of #{@search.total}
+
 %ul.searchResults
   - @search.each_hit_with_result do |hit, result|
     %li
+      %h5.category= h(result.category.name)
       %h2= h(result.title)
       - if params[:q].present?
         %p.score= hit.score

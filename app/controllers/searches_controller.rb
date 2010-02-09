@@ -13,6 +13,8 @@ class SearchesController < ApplicationController
         with(:tags).all_of(params[:tags])
       end
       with(:published_at).less_than(Time.now)
+      facet :category_id
+      facet :tags, :limit => 10
       if params[:q].blank?
         order_by :published_at, :desc
       end
