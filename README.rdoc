@@ -1,0 +1,15 @@
+== Sunspot/Rails Example Project
+
+This is a project demonstrating integration of Solr search features into a Rails
+application using the Sunspot library. It does not cover all of Sunspot's
+features, but aims to exemplify the most commonly used ones in a way that is
+easy for a new user to understand.
+
+=== Installation
+
+  $ git clone git://github.com/outoftime/sunspot-rails-example.git
+  $ sudo gem install bundler -v '= 0.8.1' # if you haven't already
+  $ gem bundle
+  $ rake faker:generate # To add example data to the database, if you want to
+  $ rake sunspot:solr:start
+  $ script/server thin
