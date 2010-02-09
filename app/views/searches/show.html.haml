@@ -1,14 +1,17 @@
 %ul.facets
   %li
-    %h4 Category
-    %ul
-      - @search.facet(:category_id).rows.each do |row|
-        %li== #{link_to(row.instance.name, params.merge(:cat => row.value).except(:page))} (#{row.count})
+    - if params[:cat].present?
+      %h4== Category: #{Category.find(params[:cat]).name} #{link_to('[x]', params.except(:cat))}
+    -else
+      %h4 Category
+      %ul
+        - @search.facet(:category_id).rows.each do |row|
+          %li== #{link_to(row.instance.name, params.merge(:cat => row.value).except(:page))} (#{row.count})
   %li
     %h4 Tag
     %ul
       - @search.facet(:tags).rows.each do |row|
-        %li== #{link_to(row.value, params.merge(:tags => ((params[:tags] || []) << row.value)).except(:page))} (#{row.count})
+        %li== #{link_to_unless((params[:tags] || []).include?(row.value), row.value, params.merge(:tags => ((params[:tags] || []) << row.value)).except(:page))} (#{row.count})
 
 
 %h4== Displaying posts #{(@search.hits.current_page - 1) * @search.hits.per_page + 1} - #{@search.hits.current_page * @search.hits.per_page} of #{@search.total}
