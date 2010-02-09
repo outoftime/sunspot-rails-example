@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   searchable do
     text :title, :default_boost => 2
     text :tags
-    text :body
+    text :body, :stored => true
     integer :category_id, :references => Category
     time :published_at
     string :tags, :multiple => true do

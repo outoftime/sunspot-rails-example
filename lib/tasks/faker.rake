@@ -16,5 +16,6 @@ namespace :faker do
           end
       end
     end
+    Sunspot.commit
   end
 end

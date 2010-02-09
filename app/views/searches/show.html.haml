@@ -1,0 +1,9 @@
+%ul.searchResults
+  - @search.each_hit_with_result do |hit, result|
+    %li
+      %h2= h(result.title)
+      - if params[:q].present?
+        %p.score= hit.score
+      %h4.timestamp= result.published_at.to_s
+      %p= best_hit_description(hit)
+      %p.tags= result.tags
