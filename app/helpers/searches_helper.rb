@@ -1,4 +1,4 @@
-module SearchHelper
+module SearchesHelper
   def best_hit_description(hit)
     if highlight = hit.highlight(:body)
       highlight.format { |word| "<strong>#{word}</strong>" }
