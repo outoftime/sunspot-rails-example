@@ -19,6 +19,7 @@ class SearchesController < ApplicationController
         order_by :published_at, :desc
       end
       paginate(:page => params[:page], :per_page => 10)
+      data_accessor_for(Post).include = :category
     end
   end
 end
