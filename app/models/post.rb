@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
     text :tags
     text :body, :stored => true
     integer :category_id, :references => Category
-    time :published_at
+    time :published_at, :trie => true
     string :tags, :multiple => true do
       tags.split(/\W+/)
     end

@@ -1,19 +1,8 @@
-require File.join(File.dirname(__FILE__), '..', 'vendor', 'bundler_gems', 'environment.rb')
-
-class Rails::Boot
-  def run
-    load_initializer
-    extend_environment
-    Rails::Initializer.run(:set_load_path)
-  end
-
-  def extend_environment
-    Rails::Initializer.class_eval do
-      old_load = instance_method(:load_environment)
-      define_method(:load_environment) do
-        Bundler.require_env RAILS_ENV
-        old_load.bind(self).call
-      end
-    end
-  end
+begin
+  # Require the preresolved set of locked gems
+  require File.expand_path(File.join(File.dirname(__FILE__), '..', '.bundle', 'environment'))
+rescue LoadError
+  require "rubygems"
+  require "bundler"
+  Bundler.setup
 end
