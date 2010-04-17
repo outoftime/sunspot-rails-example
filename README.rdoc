@@ -8,8 +8,8 @@ easy for a new user to understand.
 === Installation
 
   $ git clone git://github.com/outoftime/sunspot-rails-example.git
-  $ sudo gem install bundler -v '= 0.8.1' # if you haven't already
-  $ gem bundle
-  $ rake faker:generate # To add example data to the database, if you want to
+  $ sudo gem install bundler -v '= 0.9.7' # if you haven't already
+  $ bundle install
   $ rake sunspot:solr:start
+  $ rake faker:generate # To add example data to the database, if you want to
   $ script/server thin
